@@ -37,7 +37,7 @@
     "email": "riccardo.perra@icloud.com",
     "url": "https://github.com/riccardoperra"
   },
-  "license": "Apache-2.0",
+  "license": "MIT",
   "packageManager": "pnpm@10.9.0",
   "dependencies": {
     "vite": "^7.3.1"
