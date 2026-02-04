@@ -1,5 +1,12 @@
 # vite-plugin-native-import-maps
 
+## 0.1.0
+
+### Minor Changes
+
+- d8d4a14: Add support for vite7. SSR improvements
+- 9f40567: Add support for import maps `integrity` field
+
 ## 0.0.4
 
 ### Patch Changes
