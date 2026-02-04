@@ -95,6 +95,9 @@ export function buildWithVirtual(
             const entryImportMap = handledModules.get(entry.facadeModuleId);
             if (!entryImportMap) continue;
 
+            // TODO: https://vite.dev/guide/backend-integration
+            entry.isEntry = false;
+
             const url = `./${entry.fileName}`,
               packageName = entryImportMap.originalDependencyName;
             store.addDependency({ url, packageName });
