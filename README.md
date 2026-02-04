@@ -1,4 +1,9 @@
-# vite-plugin-native-import-maps
+<h1 align="center">vite-plugin-native-import-maps</h1>
+<br/>
+<p align="center">
+  <a href="https://npmjs.com/package/vite-plugin-native-import-maps"><img src="https://img.shields.io/npm/v/vite-plugin-native-import-maps.svg" alt="npm package"></a>
+  <a href="https://github.com/riccardoperra/vite-plugin-import-maps/actions/workflows/ci.yml"><img src="https://github.com/riccardoperra/vite-plugin-import-maps/actions/workflows/release.yml/badge.svg?branch=main" alt="build status"></a>
+</p>
 
 A Vite plugin that generates and keeps **browser import maps** in sync with your Vite dev server and production build.
 
@@ -14,8 +19,8 @@ It's aimed at **micro-frontends**, **plugin systems**, and any setup where you l
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
-- [Installation](#installation)
+- [Install](#install)
+- [Setup](#setup)
 - [Configuration](#configuration)
 - [Do You Need This Plugin?](#do-you-need-this-plugin)
 - [Recipes](#recipes)
@@ -26,7 +31,7 @@ It's aimed at **micro-frontends**, **plugin systems**, and any setup where you l
 
 ---
 
-## Installation
+## Install
 
 ```shell
 # pnpm
@@ -39,7 +44,7 @@ npm add -D vite-plugin-native-import-maps
 yarn add -D vite-plugin-native-import-maps
 ```
 
-## Quick Start
+## Setup
 
 ```ts
 import {defineConfig} from "vite";
@@ -54,7 +59,6 @@ export default defineConfig({
                 // Expose a custom/local entry under a public specifier
                 {name: "react/jsx-runtime", entry: "./src/custom-jsx-runtime.ts"},
             ],
-            sharedOutDir: "shared",
         }),
     ],
 });
