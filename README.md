@@ -96,6 +96,70 @@ export default defineConfig({
 
 ---
 
+## Do You Need This Plugin?
+
+If you're considering [import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap),
+you're likely building one of the following:
+
+- **Micro-frontend architecture** — A host app loads remote modules at runtime, and all parts need to share the same dependency instances (React, Solid, etc.)
+- **Plugin system** — Your app dynamically loads user-provided or third-party modules that rely on shared libraries
+- **Self-hosted dependency sharing** — You want to share dependencies across apps without relying on external CDN services like esm.sh or jspm.io
+
+### Why Not Third-Party Services?
+
+Services like [esm.sh](https://esm.sh) or [jspm.io](https://jspm.io) are convenient, but they come with trade-offs:
+
+- **External dependency** — Your app relies on a third-party service you don't control. If it goes down or changes, your app breaks.
+- **Network restrictions** — Many corporate environments, VPNs, and air-gapped networks block connections to public services. Your app simply won't work.
+- **Version alignment** — Ensuring host and remotes use the exact same dependency version from an external source can be error-prone.
+- **Limited flexibility** — You can't easily expose modified builds, subsets of exports, or local wrapper modules.
+
+With this plugin, **your host app becomes the source of truth**. Shared dependencies are built and served from your own infrastructure.
+
+### Why This Plugin?
+
+**Works in both development and production**
+
+Most import map solutions only work at build time. This plugin keeps the import map in sync with Vite's dev server *and* production builds. During development, it resolves to Vite's optimized deps; in production, it points to the correct hashed chunk filenames. No manual updates, no mismatches.
+
+**No build step required for remotes**
+
+Remote modules can be plain ESM files—no bundler, no plugins, no special conventions. They just `import "your-lib"` and the browser resolves it via the import map provided by the host.
+
+**Single dependency instance**
+
+Host and all remotes share the exact same module instances.
+
+**Full control over what you share**
+
+Expose npm packages as-is, or provide custom wrapper modules, modified builds, or local files. You decide exactly what each specifier resolves to.
+
+> **Note:** If a remote *does* use a bundler, shared dependencies must be marked as **external**.
+> Otherwise the remote bundles its own copy and you lose the single-instance benefit.
+
+Import maps are simple in concept, but keeping them in sync with your build is tedious:
+
+- In dev, Vite serves optimized deps from `node_modules/.vite/deps` with cache-busting hashes
+- In production, chunks have content hashes in their filenames
+- Manually updating the import map every time something changes is error-prone
+
+This plugin handles all of that. You declare what to share, and it generates the correct import map for both dev and build—automatically.
+
+**Example output:**
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "react": "/shared/react-DyndEn3u.js",
+      "react/jsx-runtime": "/shared/react_jsx-runtime-CAvv468t.js"
+    }
+  }
+</script>
+```
+
+---
+
 ## Recipes
 
 ### Expose Local Entry Points (Custom ESM Wrappers)
