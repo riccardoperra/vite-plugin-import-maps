@@ -1,5 +1,11 @@
 # vite-plugin-native-import-maps
 
+## 0.1.1
+
+### Patch Changes
+
+- 9bd2ce2: Fix missing types in published package
+
 ## 0.1.0
 
 ### Minor Changes
