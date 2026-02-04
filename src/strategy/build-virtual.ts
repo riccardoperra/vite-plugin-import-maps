@@ -33,6 +33,7 @@ export function buildWithVirtual(
   const name = pluginName("build:virtual");
   const virtualModules = new Map<string, ImportMapBuildChunkEntrypoint>();
   const localModules = new Map<string, ImportMapBuildChunkEntrypoint>();
+  console.log("virtual and local created");
   let config!: ResolvedConfig;
 
   function virtualChunksApplierPlugin(): Plugin {
@@ -49,22 +50,26 @@ export function buildWithVirtual(
             // since I expect their source is already correct and doesn't
             // need to be transformed
             const id = path.resolve(input.idToResolve);
-            this.emitFile({
-              type: "chunk",
-              name: input.entrypoint,
-              id,
-              preserveSignature: "strict",
-            });
+            if (!localModules.has(id)) {
+              this.emitFile({
+                type: "chunk",
+                name: input.entrypoint,
+                id,
+                preserveSignature: "strict",
+              });
+            }
             localModules.set(id, input);
           } else {
             const id = getVirtualFileName(input.normalizedDependencyName);
+            if (!virtualModules.has(id)) {
+              this.emitFile({
+                type: "chunk",
+                name: input.entrypoint,
+                id,
+                preserveSignature: "strict",
+              });
+            }
             virtualModules.set(id, input);
-            this.emitFile({
-              type: "chunk",
-              name: input.entrypoint,
-              id,
-              preserveSignature: "strict",
-            });
           }
         }
       },

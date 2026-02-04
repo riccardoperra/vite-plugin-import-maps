@@ -40,17 +40,17 @@
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.9.0",
   "dependencies": {
-    "vite": "^7.1.12"
+    "vite": "^7.3.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.7",
-    "@tanstack/eslint-config": "^0.3.2",
-    "@types/node": "^24.9.2",
-    "eslint": "^9.38.0",
-    "prettier": "^3.6.2",
-    "tsdown": "^0.15.12",
+    "@changesets/cli": "^2.29.8",
+    "@tanstack/eslint-config": "^0.3.4",
+    "@types/node": "^25.2.0",
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.1",
+    "tsdown": "^0.20.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.5"
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
     "vite": ">=7.0.0"

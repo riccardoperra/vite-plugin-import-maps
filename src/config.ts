@@ -53,7 +53,7 @@ export interface VitePluginImportMapsConfig {
    * NOTE: You probably have to set `false` in apps with SSR enabled,
    * and use the `virtual:importmap` dynamic import instead.
    */
-  injectImportMapsInHtml?: boolean;
+  injectImportMapsToHtml?: boolean;
   /**
    * Transform the resolved import map `imports` before writing it to the HTML file
    */

@@ -27,15 +27,16 @@ export function vitePluginNativeImportMaps(
   options: VitePluginImportMapsConfig,
 ): Array<Plugin> {
   const {
-    injectImportMapsToHtml = true
-
+    injectImportMapsToHtml = true,
+    buildOptions,
+    outputAsFile
   } = options;
 
   const plugins: Array<Plugin> = [];
 
   const store = new VitePluginImportMapsStore(options);
 
-  plugins.push(...pluginImportMapsBuildEnv(store, options.buildOptions ?? {}));
+  plugins.push(...pluginImportMapsBuildEnv(store, buildOptions ?? {}));
   plugins.push(pluginImportMapsDevelopmentEnv(store));
 
   if (injectImportMapsToHtml) {
@@ -44,7 +45,7 @@ export function vitePluginNativeImportMaps(
 
   plugins.push(pluginImportMapsAsModule(store));
 
-  if (options.outputAsFile) {
+  if (outputAsFile) {
     plugins.push(
       pluginImportMapsAsFile(store, {
         name:
